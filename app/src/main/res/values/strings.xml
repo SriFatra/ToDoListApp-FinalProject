@@ -16,5 +16,9 @@
     <string name="cancel">Cancel</string>
     <string name="create">Create</string>
     <string name="sort">Sort</string>
-    <string name="troubled_hours">Trouble Hours</string>
+    <string name="troubled_hours">Troubled Hours</string>
+    <string name="srifatra">Sri Rahayu Indal Fatra</string>
+    <string name="email">fatrasri18d@student.unhas.ac.id</string>
+    <string name="nim">D121181011</string>
+    <string name="aboutme">admin</string>
 </resources>

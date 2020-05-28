@@ -8,6 +8,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.Window
 import android.widget.SearchView
@@ -33,7 +34,6 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
 
     private var dialog: Dialog? = null
     private var countDialog: Dialog? = null
-    private var sortByMade: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +57,11 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
                 }
             }
 
-            it.sortBy { it.dueTime }
+            if (!Constants.sort) {
+                it.sortBy { it.dueTime }
+            } else {
+                it.sortBy { it.made }
+            }
 
             for (item in itemsWithNoDeadline) {
                 it.remove(item)
@@ -131,6 +135,34 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.me -> {
+                displayTodoItemCountDialog()
+            }
+            R.id.sortByDue -> {
+                Constants.sort = false
+                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+
+            R.id.sortByDo -> {
+                Constants.sort = true
+                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return true
+    }
+
+    private fun displayTodoItemCountDialog() {
+        countDialog = Dialog(this)
+        countDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        countDialog!!.setCancelable(true)
+        countDialog!!.setContentView(R.layout.activity_about)
+        countDialog!!.show()
+    }
+
     private fun clearSearchView() {
         if (!searchView.isIconified) {
             searchView.isIconified = true
@@ -162,7 +194,7 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
         todoViewModel.toggleCompleteState(todoItem)
     }
 
-    fun onterrr(todoItem: TodoItem) {
+    override fun onterrr(todoItem: TodoItem) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
