@@ -12,7 +12,7 @@
         android:id="@+id/iv_empty_task_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/empty_task_list_two"
+        android:src="@mipmap/add_assignment"
         android:scaleType="centerCrop"
         android:layout_gravity="center"
         android:visibility="gone"/>
