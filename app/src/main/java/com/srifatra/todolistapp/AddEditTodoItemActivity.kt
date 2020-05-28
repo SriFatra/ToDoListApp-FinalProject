@@ -3,22 +3,24 @@ package com.srifatra.todolistapp
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.SyncStateContract
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.srifatra.todolistapp.R
-import com.srifatra.todolistapp.notification.NotificationUtils
 import com.srifatra.todolistapp.data.database.TodoItem
+import com.srifatra.todolistapp.notification.NotificationUtils
 import com.srifatra.todolistapp.utilities.Constants
-import com.srifatra.todolistapp.utilities.Constants.KEY_INTENT
 import com.srifatra.todolistapp.utilities.convertMillis
 import com.srifatra.todolistapp.utilities.convertNumberToMonthName
 import com.srifatra.todolistapp.utilities.dateToMillis
 import kotlinx.android.synthetic.main.activity_add_edit_todo_item.*
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AddEditTodoItemActivity : AppCompatActivity() {
@@ -34,6 +36,8 @@ class AddEditTodoItemActivity : AppCompatActivity() {
     private var dateSelected = false
     private var timeSelected = false
 
+    private var updated = false
+
     var todoItem: TodoItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,9 +45,10 @@ class AddEditTodoItemActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_edit_todo_item)
 
         val intent = intent
-        if (intent != null && intent.hasExtra(SyncStateContract.Constants.KEY_INTENT)) {
-            val todoItem: TodoItem = intent.getParcelableExtra(KEY_INTENT)
+        if (intent != null && intent.hasExtra(Constants.KEY_INTENT)) {
+            val todoItem: TodoItem = intent.getParcelableExtra(Constants.KEY_INTENT)
             this.todoItem = todoItem
+            updated = true
 
             if (todoItem.dueTime!!.toInt() != 0) {
                 dateSelected = true
@@ -79,6 +84,7 @@ class AddEditTodoItemActivity : AppCompatActivity() {
         return true
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.save_todo_item -> {
@@ -90,6 +96,18 @@ class AddEditTodoItemActivity : AppCompatActivity() {
         return true
     }
 
+    private  fun getMilliFromDate(dateFormat: String?): Long {
+        var date = Date()
+        val formatter = SimpleDateFormat("dd/MM/yyyy HH/mm")
+        try {
+            date = formatter.parse(dateFormat)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return date.time
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun saveTodoItem() {
         if (validateFields()) {
             val id = if (todoItem != null) todoItem?.id else null
@@ -98,12 +116,18 @@ class AddEditTodoItemActivity : AppCompatActivity() {
                 title = et_todo_title.text.toString(),
                 note = et_todo_description.text.toString(),
                 dueTime = dueDate,
-                completed = todoItem?.completed ?: false
+                made = getMilliFromDate("yyyy MM dd HH.mm"),
+                completed = todoItem?.completed ?: false,
+                update = updated
             )
 
             val intent = Intent()
             intent.putExtra(Constants.KEY_INTENT, todo)
             setResult(RESULT_OK, intent)
+
+            if (todo.dueTime!! > 1) {
+                NotificationUtils().setNotification(todo, this)
+            }
 
             finish()
         }

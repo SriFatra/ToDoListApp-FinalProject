@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
 
     private var dialog: Dialog? = null
     private var countDialog: Dialog? = null
+    private var sortByMade: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,8 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
                 }
             }
 
+            it.sortBy { it.dueTime }
+
             for (item in itemsWithNoDeadline) {
                 it.remove(item)
             }
@@ -63,8 +66,6 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
             for (item in completedItems) {
                 it.remove(item)
             }
-
-            it.sortBy { it.dueTime }
 
             it.addAll(itemsWithNoDeadline)
             it.addAll(completedItems)
@@ -161,12 +162,15 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
         todoViewModel.toggleCompleteState(todoItem)
     }
 
+    fun onterrr(todoItem: TodoItem) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private fun displayEventDetails(todoItem: TodoItem) {
         dialog = Dialog(this)
         dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog!!.setCancelable(true)
         dialog!!.setContentView(R.layout.todo_item_display_details_dialog)
-
         dialog!!.tv_todo_title_content.text = todoItem.title
         dialog!!.tv_todo_description_content.text = todoItem.note
 

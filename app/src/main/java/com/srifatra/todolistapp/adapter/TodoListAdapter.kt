@@ -83,10 +83,10 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                 itemView.tv_item_title.apply {
                     paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
-                itemView.tv_item_dibuat.apply {
+                itemView.tv_item_made.apply {
                     paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
-                itemView.tv_dibuat.apply {
+                itemView.tv_made.apply {
                     paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
                 itemView.tv_item_due_date.apply {
@@ -99,10 +99,10 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                 itemView.tv_item_title.apply {
                     paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
-                itemView.tv_item_dibuat.apply {
+                itemView.tv_item_made.apply {
                     paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
-                itemView.tv_dibuat.apply {
+                itemView.tv_made.apply {
                     paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
                 itemView.tv_item_due_date.apply {
@@ -113,8 +113,12 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                 }
             }
 
-            if (todoItem.dueTime!!.toInt() != 0) {
-                val dateValues = convertMillis(todoItem.dueTime)
+            if (todoItem.updated == true){
+                itemView.tv_made.text ="Diupdate"
+            }
+
+            if (todoItem.made!!.toInt() != 0) {
+                val dateValues = convertMillis(todoItem.made)
                 val displayFormat: String
 
                 if (dateValues[4] < 10) {
@@ -169,5 +173,6 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
         fun onDeleteClicked(todoItem: TodoItem)
         fun onItemClicked(todoItem: TodoItem)
         fun onCheckClicked(todoItem: TodoItem)
+        fun onterrr(todoItem: TodoItem)
     }
 }
