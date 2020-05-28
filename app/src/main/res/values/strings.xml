@@ -15,4 +15,6 @@
     <string name="image">Image</string>
     <string name="cancel">Cancel</string>
     <string name="create">Create</string>
+    <string name="sort">Sort</string>
+    <string name="troubled_hours">Trouble Hours</string>
 </resources>

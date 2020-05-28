@@ -83,6 +83,12 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                 itemView.tv_item_title.apply {
                     paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
+                itemView.tv_item_dibuat.apply {
+                    paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                }
+                itemView.tv_dibuat.apply {
+                    paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                }
                 itemView.tv_item_due_date.apply {
                     paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
@@ -91,6 +97,12 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                 }
             } else {
                 itemView.tv_item_title.apply {
+                    paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                }
+                itemView.tv_item_dibuat.apply {
+                    paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                }
+                itemView.tv_dibuat.apply {
                     paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
                 itemView.tv_item_due_date.apply {

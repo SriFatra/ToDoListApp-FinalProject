@@ -2,4 +2,5 @@
 <resources>
     <item name="save_todo_item" type="id" />
     <item name="search_todo" type="id" />
+    <item name="tv_item_made" type="id" />
 </resources>
