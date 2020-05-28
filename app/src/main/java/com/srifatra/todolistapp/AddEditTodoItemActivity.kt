@@ -14,6 +14,7 @@ import com.srifatra.todolistapp.R
 import com.srifatra.todolistapp.notification.NotificationUtils
 import com.srifatra.todolistapp.data.database.TodoItem
 import com.srifatra.todolistapp.utilities.Constants
+import com.srifatra.todolistapp.utilities.Constants.KEY_INTENT
 import com.srifatra.todolistapp.utilities.convertMillis
 import com.srifatra.todolistapp.utilities.convertNumberToMonthName
 import com.srifatra.todolistapp.utilities.dateToMillis
@@ -110,12 +111,12 @@ class AddEditTodoItemActivity : AppCompatActivity() {
 
     private fun validateFields(): Boolean {
         if (et_todo_title.text.isEmpty()) {
-            til_todo_title.error = "Please enter title"
+            til_todo_title.error = "Please enter title!"
             et_todo_title.requestFocus()
             return false
         }
         if (et_todo_description.text.isEmpty()) {
-            til_todo_description.error = "Please enter description"
+            til_todo_description.error = "Please enter description!"
             et_todo_description.requestFocus()
             return false
         }
