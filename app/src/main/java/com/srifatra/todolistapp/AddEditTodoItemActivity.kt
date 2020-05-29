@@ -144,7 +144,7 @@ class AddEditTodoItemActivity : AppCompatActivity() {
             et_todo_description.requestFocus()
             return false
         }
-        Toast.makeText(this, "Item is saved successfully.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Item is saved successfully", Toast.LENGTH_SHORT).show()
         return true
     }
 

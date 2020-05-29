@@ -14,6 +14,6 @@ data class TodoItem(
     @ColumnInfo(name = "note") val note: String?,
     @ColumnInfo(name = "due") val dueTime: Long?,
     @ColumnInfo(name = "made") val made: Long?,
-    @ColumnInfo(name = "update") val update: Boolean?,
+    @ColumnInfo(name = "update") val update: Boolean,
     @ColumnInfo(name = "completed") var completed: Boolean
 ): Parcelable

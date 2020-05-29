@@ -113,7 +113,7 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                 }
             }
 
-            if (todoItem.update == true){
+            if (todoItem.update){
                 itemView.tv_made.text ="updated"
             }
 
