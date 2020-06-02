@@ -113,12 +113,8 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                 }
             }
 
-            if (todoItem.update){
-                itemView.tv_made.text ="updated"
-            }
-
-            if (todoItem.made!!.toInt() != 0) {
-                val dateValues = convertMillis(todoItem.made)
+            if (todoItem.dueTime!!.toInt() != 0) {
+                val dateValues = convertMillis(todoItem.dueTime)
                 val displayFormat: String
 
                 if (dateValues[4] < 10) {
@@ -147,6 +143,42 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
             } else {
                 itemView.tv_item_due_date.text =
                     itemView.context.getString(R.string.no_due_is_set)
+            }
+
+            if (todoItem.update){
+                itemView.tv_made.text ="updated"
+            }
+
+            if (todoItem.made!!.toInt() != 0) {
+                val dateValues = convertMillis(todoItem.made)
+                val displayFormat: String
+
+                if (dateValues[4] < 10) {
+                    displayFormat = String
+                            .format(
+                                    itemView.context.getString(R.string.due_date_minute_less_than_ten),
+                                    convertNumberToMonthName(dateValues[1]),
+                                    dateValues[0],
+                                    dateValues[2],
+                                    dateValues[3],
+                                    dateValues[4]
+                            )
+                } else {
+                    displayFormat = String
+                            .format(
+                                    itemView.context.getString(R.string.due_date_minute_greater_than_ten),
+                                    convertNumberToMonthName(dateValues[1]),
+                                    dateValues[0],
+                                    dateValues[2],
+                                    dateValues[3],
+                                    dateValues[4]
+                            )
+                }
+
+                itemView.tv_item_made.text = displayFormat
+            } else {
+                itemView.tv_item_made.text =
+                        itemView.context.getString(R.string.troubled_hours)
             }
 
             itemView.setOnClickListener {

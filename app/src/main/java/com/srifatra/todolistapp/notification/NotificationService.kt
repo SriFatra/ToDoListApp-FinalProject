@@ -120,7 +120,7 @@ class NotificationService : IntentService(Constants.INTENT_SERVICE_NAME) {
     }
 
     companion object {
-        const val CHANNEL_ID = "com.example.todolist.notification.CHANNEL_ID"
+        const val CHANNEL_ID = "com.example.todolistapp.notification.CHANNEL_ID"
         const val CHANNEL_NAME = "notification"
     }
 }

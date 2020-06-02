@@ -12,7 +12,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif"
         android:text="Title:"
-        android:textColor="#b32722"
+        android:textColor="#00897B"
         android:textSize="14sp"
         android:textStyle="normal" />
 
@@ -38,7 +38,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif"
         android:text="Additional Note:"
-        android:textColor="#b32722"
+        android:textColor="#00897B"
         android:textSize="14sp"
         android:textStyle="normal" />
 
@@ -64,8 +64,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif"
-        android:text="Due"
-        android:textColor="#b32722"
+        android:text="Due:"
+        android:textColor="#00897B"
         android:textSize="14sp"
         android:textStyle="normal" />
 
@@ -101,7 +101,7 @@
             android:focusable="true"
             android:gravity="center"
             android:text="Edit"
-            android:textColor="#b32722"
+            android:textColor="#00897B"
             android:textStyle="bold" />
 
         <TextView
@@ -112,7 +112,7 @@
             android:focusable="true"
             android:gravity="center"
             android:text="Mark Complete"
-            android:textColor="#b32722"
+            android:textColor="#00897B"
             android:textStyle="bold" />
 
     </LinearLayout>
