@@ -10,7 +10,7 @@
         android:id="@+id/picture"
         android:layout_marginVertical="24dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/fotoprofilemin"/>
+        android:src="@drawable/fotoprofile"/>
 
     <TextView
         android:layout_width="wrap_content"
